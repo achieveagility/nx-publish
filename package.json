@@ -8,6 +8,7 @@
     "@nx/devkit": "17.2.8"
   },
   "devDependencies": {
-    "@tsconfig/node20": "^20.1.2"
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "^20.10.8"
   }
 }
