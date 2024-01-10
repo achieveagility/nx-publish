@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Nx yarn deploy executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "projectFolderPath": {
+      "type": "string",
+      "description": "The project folder path, relative to the repository root."
+    },
+    "access": {
+      "type": "string",
+      "description": "The access level of the package.",
+      "enum": ["public", "restricted"]
+    }
+  },
+  "required": ["projectFolderPath"]
+}
