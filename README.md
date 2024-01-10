@@ -1,3 +1,3 @@
 # nx-publish
 
-Nx executor for npm publishing
+Nx executor for npm publishing.
