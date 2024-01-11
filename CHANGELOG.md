@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/achieveagility/nx-publish/compare/v1.0.5...v1.0.6) (2024-01-11)
+
+
+### Bug Fixes
+
+* update package manager ([#16](https://github.com/achieveagility/nx-publish/issues/16)) ([b1afa23](https://github.com/achieveagility/nx-publish/commit/b1afa234d4bcad69385a1dc99e873254063f2563))
+
 ## [1.0.5](https://github.com/achieveagility/nx-publish/compare/v1.0.4...v1.0.5) (2024-01-11)
 
 
