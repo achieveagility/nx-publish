@@ -24,7 +24,9 @@ jobs:
         with:
           node-version: 20
         if: ${{ steps.release.outputs.release_created }}
-      - run: yarn npm publish
+      - run: |
+          corepack enable
+          yarn npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
