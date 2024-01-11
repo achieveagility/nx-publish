@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/achieveagility/nx-publish/compare/v1.0.7...v1.0.8) (2024-01-11)
+
+
+### Bug Fixes
+
+* update env ([#20](https://github.com/achieveagility/nx-publish/issues/20)) ([e76379d](https://github.com/achieveagility/nx-publish/commit/e76379d585c090b5a3a72feac6c4610b4ada8df5))
+
 ## [1.0.7](https://github.com/achieveagility/nx-publish/compare/v1.0.6...v1.0.7) (2024-01-11)
 
 
