@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/achieveagility/nx-publish/compare/v1.0.3...v1.0.4) (2024-01-11)
+
+
+### Bug Fixes
+
+* add step id ([#12](https://github.com/achieveagility/nx-publish/issues/12)) ([29d2158](https://github.com/achieveagility/nx-publish/commit/29d21588d87517aaf5568a9cf5ff34b907bccaa3))
+
 ## [1.0.3](https://github.com/achieveagility/nx-publish/compare/v1.0.2...v1.0.3) (2024-01-10)
 
 
