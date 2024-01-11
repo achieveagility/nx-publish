@@ -2,22 +2,22 @@ import path from "node:path";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import { ExecutorContext } from "@nx/devkit";
-import { NxYarnDeployExecutorSchema } from "./schema";
+import { NxPublishExecutorSchema } from "./schema";
 
 function log(message: string, data?: unknown) {
   console.log(
-    "Nx Yarn Deploy Executor:",
+    "Nx Publish Executor:",
     message,
     data ? JSON.stringify(data, null, 2) : ""
   );
 }
 
 function logError(message: string) {
-  console.error("Nx Yarn Deploy Executor Error:", message);
+  console.error("Nx Publish Executor Error:", message);
 }
 
 export default async function runExecutor(
-  options: NxYarnDeployExecutorSchema,
+  options: NxPublishExecutorSchema,
   context: ExecutorContext
 ) {
   log("Received options", options);
@@ -27,13 +27,14 @@ export default async function runExecutor(
   log("Running yarn npm publish", { projectFolder });
 
   try {
-    const publishCommand = `yarn npm publish --access ${
-      options.access ?? "restricted"
-    }`;
+    const publishCommandArgs = [
+      "yarn npm publish",
+      ...(options.access ? [`--access ${options.access}`] : []),
+    ];
 
     const { stdout: publishStdout, stderr: publishStderr } = await promisify(
       exec
-    )(publishCommand, {
+    )(publishCommandArgs.join(" "), {
       cwd: projectFolder,
     });
 

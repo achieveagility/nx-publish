@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "version": 2,
-  "title": "Nx yarn deploy executor",
+  "title": "Nx publish executor",
   "description": "",
   "type": "object",
   "properties": {
