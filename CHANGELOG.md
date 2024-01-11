@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/achieveagility/nx-publish/compare/v1.0.4...v1.0.5) (2024-01-11)
+
+
+### Bug Fixes
+
+* add corepack enable ([#14](https://github.com/achieveagility/nx-publish/issues/14)) ([104f308](https://github.com/achieveagility/nx-publish/commit/104f308a9c2254f1471063b4d037b421d8bd3a68))
+
 ## [1.0.4](https://github.com/achieveagility/nx-publish/compare/v1.0.3...v1.0.4) (2024-01-11)
 
 
