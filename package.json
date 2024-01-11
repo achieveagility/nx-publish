@@ -6,10 +6,8 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "executors": "./executors.json",
-  "dependencies": {
-    "@nx/devkit": "17.2.8"
-  },
   "devDependencies": {
+    "@nx/devkit": "17.2.8",
     "@tsconfig/node20": "^20.1.2",
     "@types/node": "^20.10.8"
   }
