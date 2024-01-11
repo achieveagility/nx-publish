@@ -1,14 +1,9 @@
 {
   "executors": {
-    "echo": {
-      "implementation": "./src/executors/echo/executor",
-      "schema": "./src/executors/echo/schema.json",
-      "description": "echo executor"
-    },
-    "deploy": {
-      "implementation": "./src/executors/deploy/executor",
-      "schema": "./src/executors/deploy/schema.json",
-      "description": "deploy executor"
+    "publish": {
+      "implementation": "./src/executors/publish/executor",
+      "schema": "./src/executors/publish/schema.json",
+      "description": "Nx publish executor"
     }
   }
 }
