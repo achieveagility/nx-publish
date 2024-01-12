@@ -43,7 +43,9 @@ jobs:
           release-type: node
         if: github.ref == 'refs/heads/main'
       - name: Publish
-        run: yarn npm publish
+        run: |
+          yarn build
+          yarn npm publish
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
