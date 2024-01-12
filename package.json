@@ -13,6 +13,11 @@
     "build": "tsup",
     "test": "echo No tests"
   },
+  "files": [
+    "/dist/**/*",
+    "CHANGELOG.md",
+    "executors.json"
+  ],
   "devDependencies": {
     "@nx/devkit": "17.2.8",
     "@tsconfig/node20": "^20.1.2",
