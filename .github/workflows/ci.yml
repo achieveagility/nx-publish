@@ -1,0 +1,45 @@
+# See https://github.com/google-github-actions/release-please-action
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: |
+          corepack enable
+          yarn --immutable
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build
+        run: yarn build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Test
+        run: yarn test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: google-github-actions/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+      - name: Publish
+        run: yarn npm publish
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
