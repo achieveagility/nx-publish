@@ -11,8 +11,12 @@ function log(message: string, data?: unknown) {
   );
 }
 
-function logError(message: string) {
-  console.error("Nx Publish Executor Error:", message);
+function logError(message: string, data?: unknown) {
+  console.error(
+    "Nx Publish Executor Error:",
+    message,
+    data ? JSON.stringify(data, null, 2) : ""
+  );
 }
 
 export default async function runExecutor(
@@ -23,9 +27,9 @@ export default async function runExecutor(
 
   const projectFolder = path.join(context.root, options.projectFolderPath);
 
-  log("Running yarn npm publish", { projectFolder });
-
   try {
+    log("Running yarn npm publish...", { projectFolder });
+
     const publishCommandArgs = [
       "yarn npm publish",
       ...(options.access ? [`--access ${options.access}`] : []),
@@ -37,23 +41,29 @@ export default async function runExecutor(
       cwd: projectFolder,
     });
 
-    log("Release", { stdout: publishStdout, stderr: publishStderr });
+    log("Publish complete.", { stdout: publishStdout, stderr: publishStderr });
+  } catch (error) {
+    logError("There was an error publishing the package.", error);
+    return { success: false };
+  }
 
-    const gitPushCommand = `git push --atomic --follow-tags`;
+  try {
+    log("Running git push...");
+
+    const gitPushCommandArgs = ["git push", "--atomic", "--follow-tags"];
 
     // Git writes to stderr even when there is no error
     const { stdout: gitPushStdout, stderr: gitPushStderr } = await promisify(
       exec
-    )(gitPushCommand, {
+    )(gitPushCommandArgs.join(" "), {
       cwd: projectFolder,
     });
 
-    log("Git push", { stdout: gitPushStdout, stderr: gitPushStderr });
+    log("Git push complete.", { stdout: gitPushStdout, stderr: gitPushStderr });
 
     return { success: true };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    logError(error.stdout);
+  } catch (error) {
+    logError("There was an error running git push.", error);
 
     return { success: false };
   }
