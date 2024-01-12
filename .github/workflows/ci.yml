@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -38,6 +41,7 @@ jobs:
         id: release
         with:
           release-type: node
+        if: github.ref == 'refs/heads/main'
       - name: Publish
         run: yarn npm publish
         env:
