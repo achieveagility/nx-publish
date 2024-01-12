@@ -10,7 +10,8 @@
   "typings": "dist/index.d.ts",
   "executors": "./executors.json",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && yarn copy:schema",
+    "copy:schema": "cp ./src/executors/publish/schema.json ./dist/schema.json",
     "test": "echo No tests"
   },
   "files": [
