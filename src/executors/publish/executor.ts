@@ -1,7 +1,6 @@
 import path from "node:path";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import { ExecutorContext } from "@nx/devkit";
 import { NxPublishExecutorSchema } from "./schema";
 
 function log(message: string, data?: unknown) {
@@ -18,7 +17,7 @@ function logError(message: string) {
 
 export default async function runExecutor(
   options: NxPublishExecutorSchema,
-  context: ExecutorContext
+  context: { root: string }
 ) {
   log("Received options", options);
 
