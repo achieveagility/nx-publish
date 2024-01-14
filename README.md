@@ -64,6 +64,24 @@ You can follow the documentation for the [Nx semver plugin](https://github.com/j
 }
 ```
 
+#### .yarnrc.yml
+
+```
+npmPublishAccess: public
+
+npmScopes:
+  foo:
+    npmAlwaysAuth: true
+    npmAuthToken: "${NPM_TOKEN}"
+```
+
+## Options
+
+| Name                    | Type                    | Required | Default | Description                                                                                                                                |
+| ----------------------- | ----------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`projectFolderPath`** | `string`                | `true`   |         | The path to the package folder to publish, relative to the repository root.                                                                |
+| **`access`**            | `public  \| restricted` | `false`  |         | See npm publish [access](https://docs.npmjs.com/cli/v7/commands/npm-publish). Overrides `npmPublishAccess` configuration in `.yarnrc.yml`. |
+
 ## Troubleshooting
 
 > You cannot publish over the previously published versions
