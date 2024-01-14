@@ -44,27 +44,33 @@ export default async function runExecutor(
     log("Publish complete.", { stdout: publishStdout, stderr: publishStderr });
   } catch (error) {
     logError("There was an error publishing the package.", error);
-    return { success: false };
-  }
-
-  try {
-    log("Running git push...");
-
-    const gitPushCommandArgs = ["git push", "--atomic", "--follow-tags"];
-
-    // Git writes to stderr even when there is no error
-    const { stdout: gitPushStdout, stderr: gitPushStderr } = await promisify(
-      exec
-    )(gitPushCommandArgs.join(" "), {
-      cwd: projectFolder,
-    });
-
-    log("Git push complete.", { stdout: gitPushStdout, stderr: gitPushStderr });
-
-    return { success: true };
-  } catch (error) {
-    logError("There was an error running git push.", error);
 
     return { success: false };
   }
+
+  if (options.push) {
+    try {
+      log("Running git push...");
+
+      const gitPushCommandArgs = ["git push", "--atomic", "--follow-tags"];
+
+      // Git writes to stderr even when there is no error
+      const { stdout: gitPushStdout, stderr: gitPushStderr } = await promisify(
+        exec
+      )(gitPushCommandArgs.join(" "), {
+        cwd: projectFolder,
+      });
+
+      log("Git push complete.", {
+        stdout: gitPushStdout,
+        stderr: gitPushStderr,
+      });
+    } catch (error) {
+      logError("There was an error running git push.", error);
+
+      return { success: false };
+    }
+  }
+
+  return { success: true };
 }
