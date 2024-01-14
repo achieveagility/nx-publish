@@ -1,6 +1,6 @@
 {
   "name": "@aaos/nx-publish",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "packageManager": "yarn@4.0.2",
   "type": "commonjs",
   "source": "src/index.ts",

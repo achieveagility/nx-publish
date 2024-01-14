@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/achieveagility/nx-publish/compare/v1.1.5...v1.2.0) (2024-01-14)
+
+
+### Features
+
+* add push option ([#38](https://github.com/achieveagility/nx-publish/issues/38)) ([c2d8f64](https://github.com/achieveagility/nx-publish/commit/c2d8f641cf4da8ded40451af4a54e40729b9e42e))
+
 ## [1.1.5](https://github.com/achieveagility/nx-publish/compare/v1.1.4...v1.1.5) (2024-01-12)
 
 
