@@ -27,10 +27,9 @@ The executor runs the following commands:
 
 ```
 yarn npm publish
-git push --atomic --follow-tags
 ```
 
-These are useful after versioning packages and creating updated Git tags, for example when using the [semver plugin for Nx](https://github.com/jscutlery/semver).
+This is useful after versioning packages, for example when using the [semver plugin for Nx](https://github.com/jscutlery/semver).
 
 ## Usage with Nx semver
 
@@ -44,6 +43,7 @@ You can follow the documentation for the [Nx semver plugin](https://github.com/j
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
+        "push": true,
         "postTargets": ["npm-publish", "github-release"]
       }
     },
@@ -81,6 +81,7 @@ npmScopes:
 | ----------------------- | ----------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | **`projectFolderPath`** | `string`                | `true`   |         | The path to the package folder to publish, relative to the repository root.                                                                |
 | **`access`**            | `public  \| restricted` | `false`  |         | See npm publish [access](https://docs.npmjs.com/cli/v7/commands/npm-publish). Overrides `npmPublishAccess` configuration in `.yarnrc.yml`. |
+| **`push`**              | `boolean`               | `false`  | `false` | Perform a `git push --atomic --follow-tags` to the repository after publish.                                                               |
 
 ## Troubleshooting
 
