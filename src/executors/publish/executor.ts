@@ -41,13 +41,13 @@ async function runCommand({
 
   log("Running command...", { command, cwd });
 
-  const response = promisify(exec)(command, {
+  const { stdout, stderr } = await promisify(exec)(command, {
     cwd,
   });
 
-  log("Command complete.", { command, ...response });
+  log("Command complete.", { command, stdout, stderr });
 
-  return response;
+  return { stdout, stderr };
 }
 
 export default async function runExecutor(
