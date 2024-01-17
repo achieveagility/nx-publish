@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/achieveagility/nx-publish/compare/v1.2.0...v1.3.0) (2024-01-17)
+
+
+### Features
+
+* add dry run ([#40](https://github.com/achieveagility/nx-publish/issues/40)) ([4c2fbc4](https://github.com/achieveagility/nx-publish/commit/4c2fbc4d344f99c9c2e9d90078efe929a18c554c))
+
 ## [1.2.0](https://github.com/achieveagility/nx-publish/compare/v1.1.5...v1.2.0) (2024-01-14)
 
 
