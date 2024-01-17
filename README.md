@@ -82,6 +82,7 @@ npmScopes:
 | **`projectFolderPath`** | `string`                | `true`   |         | The path to the package folder to publish, relative to the repository root.                                                                |
 | **`access`**            | `public  \| restricted` | `false`  |         | See npm publish [access](https://docs.npmjs.com/cli/v7/commands/npm-publish). Overrides `npmPublishAccess` configuration in `.yarnrc.yml`. |
 | **`push`**              | `boolean`               | `false`  | `false` | Perform a `git push --atomic --follow-tags` to the repository after publish.                                                               |
+| **`dryRun`**            | `boolean`               | `false`  | `false` | Perform a dry run - options and commands will be logged.                                                                                   |
 
 ## Troubleshooting
 
