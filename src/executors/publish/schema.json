@@ -18,6 +18,11 @@
       "type": "boolean",
       "description": "Whether to perform a Git push after package publication.",
       "default": false
+    },
+    "dryRun": {
+      "type": "boolean",
+      "description": "Whether to perform a dry run.",
+      "default": false
     }
   },
   "required": ["projectFolderPath"]

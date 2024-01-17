@@ -19,29 +19,58 @@ function logError(message: string, data?: unknown) {
   );
 }
 
+async function runCommand({
+  commandArgs,
+  cwd,
+  dryRun,
+}: {
+  commandArgs: string[];
+  cwd: string;
+  dryRun: boolean;
+}): Promise<{ stdout: string; stderr: string }> {
+  const command = commandArgs.join(" ");
+
+  if (dryRun) {
+    log("Dry run, skipping command execution.", {
+      command,
+      cwd,
+    });
+
+    return { stdout: "", stderr: "" };
+  }
+
+  log("Running command...", { command, cwd });
+
+  const response = promisify(exec)(command, {
+    cwd,
+  });
+
+  log("Command complete.", { command, ...response });
+
+  return response;
+}
+
 export default async function runExecutor(
   options: NxPublishExecutorSchema,
   context: { root: string }
 ) {
+  const { dryRun = false } = options;
+
   log("Received options", options);
 
   const projectFolder = path.join(context.root, options.projectFolderPath);
 
   try {
-    log("Running yarn npm publish...", { projectFolder });
-
     const publishCommandArgs = [
       "yarn npm publish",
       ...(options.access ? [`--access ${options.access}`] : []),
     ];
 
-    const { stdout: publishStdout, stderr: publishStderr } = await promisify(
-      exec
-    )(publishCommandArgs.join(" "), {
+    await runCommand({
+      commandArgs: publishCommandArgs,
       cwd: projectFolder,
+      dryRun,
     });
-
-    log("Publish complete.", { stdout: publishStdout, stderr: publishStderr });
   } catch (error) {
     logError("There was an error publishing the package.", error);
 
@@ -50,20 +79,13 @@ export default async function runExecutor(
 
   if (options.push) {
     try {
-      log("Running git push...");
-
       const gitPushCommandArgs = ["git push", "--atomic", "--follow-tags"];
 
       // Git writes to stderr even when there is no error
-      const { stdout: gitPushStdout, stderr: gitPushStderr } = await promisify(
-        exec
-      )(gitPushCommandArgs.join(" "), {
+      await runCommand({
+        commandArgs: gitPushCommandArgs,
         cwd: projectFolder,
-      });
-
-      log("Git push complete.", {
-        stdout: gitPushStdout,
-        stderr: gitPushStderr,
+        dryRun,
       });
     } catch (error) {
       logError("There was an error running git push.", error);
