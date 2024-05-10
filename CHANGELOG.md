@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/achieveagility/nx-publish/compare/v1.3.1...v1.4.0) (2024-05-10)
+
+
+### Features
+
+* add pnpm ([#44](https://github.com/achieveagility/nx-publish/issues/44)) ([b29d5f3](https://github.com/achieveagility/nx-publish/commit/b29d5f3d23fbf850b7a5c2f8516de9c3203cd941))
+
 ## [1.3.1](https://github.com/achieveagility/nx-publish/compare/v1.3.0...v1.3.1) (2024-01-17)
 
 
