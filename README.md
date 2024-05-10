@@ -1,6 +1,6 @@
 # nx-publish
 
-Nx executor for [Yarn](https://yarnpkg.com/) npm publishing.
+Nx executor for [Yarn](https://yarnpkg.com/) or [pnpm](https://pnpm.io/) package publishing.
 
 ## Usage
 
@@ -23,11 +23,7 @@ Use the executor in an Nx target within `project.json`:
 
 ## Overview
 
-The executor runs the following commands:
-
-```
-yarn npm publish
-```
+The executor runs either `yarn npm publish` (default) or `pnpm publish` depending on the `packageManager` setting (see below).
 
 This is useful after versioning packages, for example when using the [semver plugin for Nx](https://github.com/jscutlery/semver).
 
@@ -50,6 +46,7 @@ You can follow the documentation for the [Nx semver plugin](https://github.com/j
     "npm-publish": {
       "executor": "@aaos/nx-publish:publish",
       "options": {
+        "packageManager": "pnpm",
         "projectFolderPath": "./packages/my-package"
       }
     },
@@ -64,7 +61,9 @@ You can follow the documentation for the [Nx semver plugin](https://github.com/j
 }
 ```
 
-#### .yarnrc.yml
+#### Publishing settings
+
+If using Yarn, you can configure default publishing settings with `.yarnrc.yml`, e.g:
 
 ```
 npmPublishAccess: public
@@ -75,11 +74,18 @@ npmScopes:
     npmAuthToken: "${NPM_TOKEN}"
 ```
 
+If using pnpm, you can configure default publishing settings with `.npmrc`, e.g:
+
+```
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+```
+
 ## Options
 
 | Name                    | Type                    | Required | Default | Description                                                                                                                                |
 | ----------------------- | ----------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | **`projectFolderPath`** | `string`                | `true`   |         | The path to the package folder to publish, relative to the repository root.                                                                |
+| **`packageManager`**    | `yarn \| pnpm`          | `false`  | `yarn`  | The package manager command to use for publishing.                                                                                         |
 | **`access`**            | `public  \| restricted` | `false`  |         | See npm publish [access](https://docs.npmjs.com/cli/v7/commands/npm-publish). Overrides `npmPublishAccess` configuration in `.yarnrc.yml`. |
 | **`push`**              | `boolean`               | `false`  | `false` | Perform a `git push --atomic --follow-tags` to the repository after publish.                                                               |
 | **`dryRun`**            | `boolean`               | `false`  | `false` | Perform a dry run - options and commands will be logged.                                                                                   |

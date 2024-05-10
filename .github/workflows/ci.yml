@@ -23,18 +23,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install dependencies
+      - name: Build and test
         run: |
           corepack enable
-          yarn --immutable
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Build
-        run: yarn build
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Test
-        run: yarn test
+          pnpm install --frozen-lockfile
+          pnpm build
+          pnpm test
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: google-github-actions/release-please-action@v4
@@ -44,8 +38,8 @@ jobs:
         if: github.ref == 'refs/heads/main'
       - name: Publish
         run: |
-          yarn build
-          yarn npm publish
+          pnpm build
+          pnpm publish
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
