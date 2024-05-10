@@ -54,7 +54,7 @@ export default async function runExecutor(
   options: NxPublishExecutorSchema,
   context: { root: string }
 ) {
-  const { dryRun = false } = options;
+  const { packageManager = "yarn", dryRun = false } = options;
 
   log("Received options", options);
 
@@ -62,7 +62,7 @@ export default async function runExecutor(
 
   try {
     const publishCommandArgs = [
-      "yarn npm publish",
+      packageManager === "yarn" ? "yarn npm publish" : "pnpm publish",
       ...(options.access ? [`--access ${options.access}`] : []),
     ];
 
